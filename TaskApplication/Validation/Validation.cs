@@ -6,11 +6,10 @@ namespace TaskApplication.Validations
     public static class Validation
     {
 
-        public static string StringValid(string value)
+        public static bool StringValid(string value)
         {
-            if (!string.IsNullOrWhiteSpace(value))
-                return "Ok";
-            return "Пустая строка!";
+            if (!string.IsNullOrWhiteSpace(value)) return true;
+            return false;
         }
 
         public static bool Pars(int value)
@@ -20,20 +19,20 @@ namespace TaskApplication.Validations
         }
         public static bool Pars(int? value)
         {
-            if(value != null)
+            if (value != null)
             {
-             int res;
-             return Int32.TryParse(value.ToString(), out res);
+                int res;
+                return Int32.TryParse(value.ToString(), out res);
             }
             return true;
         }
 
         public static string Valid(string firstname, string lastname, int? days, int? hours, int rate)
         {
-            StringValid(firstname);
-            StringValid(lastname);
             try
             {
+                if (!StringValid(firstname)) return "Пустая строка!";
+                if (!StringValid(lastname)) return "Пустая строка!";
                 var parsDays = Pars(days);
                 var parsHours = Pars(hours);
                 var parsRate = Pars(rate);

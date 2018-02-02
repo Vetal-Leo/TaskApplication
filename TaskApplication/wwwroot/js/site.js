@@ -1,16 +1,33 @@
 ﻿
-// It is manipulating with attributes and styles.
-$(function () {
+// 
+var userstatus = new Boolean(false);
 
+$(function () {
     addemploeeButton.onclick = function () {
 
-        $(this).css('visibility', 'hidden');
+        $("#addemploeeButton").css('visibility', 'hidden');
+        userstatus = true;
         $("tr:last").css('visibility', 'visible');
         $('#inputcheckbox').val(true);
+       // alert(userstatus);//debugging alert;
     };
 
-    $('#inputcheckbox').click(function () {
-        if ($(this).is(':checked')) {
+    $('#inputcheckbox').click(function () { Choice() });
+    window.onload = function () {
+        // alert($("#addemploeeButton").css('visibility'))//debugging alert;
+        if ($("#addemploeeButton").css('visibility') === "visible") {
+            userstatus = false;
+        } else {
+            userstatus = true;
+        }
+        // alert(userstatus);//debugging alert;
+        if (userstatus) { Choice(); }
+    };
+
+
+
+    function Choice() {
+        if ($('#inputcheckbox').is(':checked')) {
             $('#inputcheckbox').val(true);
             $('#inputdays').css('visibility', 'visible');
             $('#inputhours').css('visibility', 'hidden');
@@ -22,7 +39,7 @@ $(function () {
             $('#inputhours').css('visibility', 'visible');
             $('#inputrate').attr("placeholder", " Введите ставку за час");
         }
-    });
+    };
 
     $('.calculate').click(function () {
         $.ajax({
@@ -49,8 +66,4 @@ $(function () {
         });
     });
 
-
-    function Clear() {
-        TODO;
-    }
 });
