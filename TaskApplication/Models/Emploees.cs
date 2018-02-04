@@ -1,6 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace TaskApplication.Models
 {

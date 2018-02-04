@@ -5,7 +5,31 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
+<br /><br /><br />
+<div>
+    <div class="row">
+        <div class="col-xs-6">
+            <form>
+                <div class="form-group" style="width: 7cm">
+                    <label for="inputDate">Введите начальную дату(для фиксированной оплаты):</label>
+                    <input type="date" class="form-control" id="firstdate">
+                </div>
+            </form>
+        </div>
+        <div class="col-xs-6">
+            <div class="col-xs-6">
+                <form>
+                    <div class="form-group" style="width: 7cm">
+                        <label for="inputDate">Введите конечную дату(для фиксированной оплаты):</label>
+                        <input type="date" class="form-control" id="lastdate">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br />
+    <h4 class="text-danger errordate" />
+</div>
 <br /><br />
 <form method="post">
     <table class="table">
@@ -23,30 +47,32 @@
         </thead>
         <tbody>
             @foreach (var emploee in Model.Emploees)
-    {
-        <tr>
-            <td>@emploee.ID</td>
-            <td>@emploee.F_NAME</td>
-            <td>@emploee.L_NAME</td>
-            <td><input type="checkbox" checked="@emploee.FIX_PAYMENT"></td>
-            <td>@emploee.COUNT_DAYS</td>
-            <td>@emploee.COUNT_HOUR</td>
-            <td>@emploee.RATE</td>
-            <td>
-                <a id="@emploee.ID" class="btn btn-primary btn-sm calculate">Рассчитать</a>
-            </td>
-        </tr>
-}
-        <tr style="visibility: @ViewData["hidden"]">
-                    <td></td>
-                    <td><input type="text" name="firstname" placeholder=" Введите Имя" value="@ViewData["firstname"]" /></td>
-                    <td><input type="text" name="lastname" placeholder=" Введите Фамилию" value="@ViewData["lastname"]" /></td>
-                    <td><input type="checkbox" name="fixpayment" checked="@ViewData["fixpayment"]"  id="inputcheckbox"></td>
-                    <td><input type="number" name="days" placeholder=" Введите кол. дней" value="@ViewData["days"]" id="inputdays" /></td>
-                    <td><input type="number" name="hours" placeholder=" Введите кол. часов" value="@ViewData["hours"]" id="inputhours" style="visibility: hidden"/></td>
-                    <td><input type="number" name="rate" placeholder=" Введите ставку за день" value="@ViewData["rate"]" id="inputrate" /></td>
-                    <td><button type="submit" class="btn btn-success btn-sm" id="addemploee">Добавить</button></td>
+            {
+                <tr>
+                    <td>@emploee.ID</td>
+                    <td>@emploee.F_NAME</td>
+                    <td>@emploee.L_NAME</td>
+                    <td><input type="checkbox" checked="@emploee.FIX_PAYMENT"></td>
+                    <td>@emploee.COUNT_DAYS</td>
+                    <td>@emploee.COUNT_HOUR</td>
+                    <td>@emploee.RATE</td>
+                    <td>
+                        <a id="@emploee.ID" class="btn btn-primary btn-sm calculate">Рассчитать</a>
+                    </td>
                 </tr>
+            }
+
+            <!-- This is the line for entering a new employee. -->
+            <tr style="visibility: @ViewData["hidden"]">
+                <td></td>
+                <td><input type="text" name="firstname" placeholder=" Введите Имя" value="@ViewData["firstname"]" /></td>
+                <td><input type="text" name="lastname" placeholder=" Введите Фамилию" value="@ViewData["lastname"]" /></td>
+                <td><input type="checkbox" name="fixpayment" checked="@ViewData["fixpayment"]" id="inputcheckbox"></td>
+                <td><input type="number" name="days" placeholder=" Введите кол. дней" value="@ViewData["days"]" id="inputdays" /></td>
+                <td><input type="number" name="hours" placeholder=" Введите кол. часов" value="@ViewData["hours"]" id="inputhours" style="visibility: hidden" /></td>
+                <td><input type="number" name="rate" placeholder=" Введите ставку за день" value="@ViewData["rate"]" id="inputrate" /></td>
+                <td><button type="submit" class="btn btn-success btn-sm" id="addemploee">Добавить</button></td>
+            </tr>
         </tbody>
     </table>
     <a id="addemploeeButton" class="btn btn-success btn-sm" style="visibility:@ViewData["visibility"]">Добавить сотрудника</a>
@@ -55,4 +81,6 @@
     <h4 class="text-danger error">@ViewData["Message"]</h4>
     <h3 class="text-info emploee" />
     <h4 class="text-info salary" style="font-weight: bold" />
+    <h4 class="text-info status" style="font-weight: bold" />
 </div>
+
